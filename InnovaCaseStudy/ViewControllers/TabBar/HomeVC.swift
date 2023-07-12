@@ -11,7 +11,7 @@ import UIKit
 class HomeVC: UIViewController {
     private lazy var walletTitle: UILabel = {
         let label = UILabel()
-        label.text = "My Wallet: \(Int((Global.shared.currentUser?.wallet)!))"
+        label.text = "My Wallet: \(Global.shared.currentUser!.wallet!.calculatePrice())"
         label.font = .boldSystemFont(ofSize: 32)
         label.textColor = .white
         return label
@@ -43,6 +43,7 @@ class HomeVC: UIViewController {
         fetchProduct()
         setupUI()
         setConstraints()
+        updateWallet()
     }
 
     func setupUI() {
@@ -63,14 +64,23 @@ class HomeVC: UIViewController {
         }
         transactionsTableView.snp.makeConstraints { make in
             make.top.equalTo(recentTransactionsLabel.snp.bottom)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+    }
+    func updateWallet(){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateWallet"), object: nil, queue: nil) { [self] notification in
+            walletTitle.text = "My Wallet: \(Global.shared.currentUser!.wallet!.calculatePrice())"
         }
     }
 
     func fetchProduct() {
         do {
             let updatedTransactions = try NetworkManager.shared.readJSONData(fileName: "Action", objectType: [Transactions].self)
-            Global.shared.transactionsArr = updatedTransactions
+            updatedTransactions.forEach { Transaction in
+                Global.shared.transactionsArr.append(Transaction)
+            }
+            
         } catch {
             print("Hata: \(error)")
         }

@@ -14,11 +14,12 @@ class BudgetVC: UIViewController {
         button.setTitle("Income", for: .normal)
         button.backgroundColor = .systemGreen
         button.titleLabel?.font = .boldSystemFont(ofSize: 24)
-        button.setTitleColor( .white, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(incomeExpenseClicked), for: .touchUpInside)
         button.layer.cornerRadius = 10
         return button
     }()
+
     private lazy var transactionNameTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
@@ -29,7 +30,7 @@ class BudgetVC: UIViewController {
         textField.placeholder = "Transaction Name"
         return textField
     }()
-    
+
     private lazy var cashTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
@@ -42,18 +43,35 @@ class BudgetVC: UIViewController {
         return textField
     }()
 
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Add Transaction", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = .systemGray6
+        button.addTarget(self, action: #selector(addClicked), for: .touchUpInside)
+        return button
+    }()
+
+    var activityIndicator: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hideKeyboardWhenTappedAround()
+
         setupUI()
         setConstraints()
     }
-    func setupUI(){
+
+    func setupUI() {
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .black
-        view.addSubviews(incomeExpenseButton, transactionNameTextField, cashTextField)
-        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        view.addSubviews(incomeExpenseButton, transactionNameTextField, cashTextField, addButton, activityIndicator)
     }
+
     func setConstraints() {
         incomeExpenseButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -73,9 +91,16 @@ class BudgetVC: UIViewController {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(50)
         }
+        addButton.snp.makeConstraints { make in
+            make.top.equalTo(cashTextField.snp.bottom).offset(24)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(132)
+            make.height.equalTo(50)
+        }
     }
+
     @objc
-    func incomeExpenseClicked(){
+    func incomeExpenseClicked() {
         if isExpense {
             incomeExpenseButton.setTitle("Income", for: .normal)
             incomeExpenseButton.backgroundColor = .systemGreen
@@ -87,5 +112,37 @@ class BudgetVC: UIViewController {
         }
     }
 
+    @objc
+    func addClicked() {
+        if transactionNameTextField.text != "", cashTextField.text != "" {
+            let type = isExpense ? Transactions.TransactionType.expense : Transactions.TransactionType.income
+            let transaction = Transactions(type: type, name: transactionNameTextField.text, date: Date().toString(), price: Price(value: Double(cashTextField.text!)!, currency: .TRY))
+            startActivityIndicator()
 
+            FirebaseManager.shared.addTransactions(object: transaction) {[self] _ in
+                FirebaseManager.shared.updateWallet(isExpense: isExpense, cash: Double(cashTextField.text!)!, currencyType: .TRY) { [self] _ in
+                    FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
+                        Global.shared.currentUser = user
+                        NotificationCenter.default.post(name: NSNotification.Name("UpdateWallet"), object: nil)
+                        stopActivityIndicator()
+                        Global.shared.transactionsArr.append(transaction)
+                        
+                    }
+                }
+            }
+
+        } else {
+            print("error")
+        }
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
+    }
 }

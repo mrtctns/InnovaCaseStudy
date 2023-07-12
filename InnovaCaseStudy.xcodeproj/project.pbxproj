@@ -44,6 +44,7 @@
 		414E12212A5F1781007683D7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 414E12202A5F1781007683D7 /* Alamofire */; };
 		414E12252A5F2266007683D7 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12242A5F2266007683D7 /* Currency.swift */; };
 		414E12272A5F4D4B007683D7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12262A5F4D4B007683D7 /* UIViewController+Extension.swift */; };
+		414E122A2A5F6EEC007683D7 /* CustomTextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		414E121B2A5F0253007683D7 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		414E12242A5F2266007683D7 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		414E12262A5F4D4B007683D7 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 		414E11ED2A5EC9A9007683D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				414E12282A5F6EB9007683D7 /* CustomView */,
 				414E11EE2A5EC9B6007683D7 /* TableCell */,
 			);
 			path = View;
@@ -305,6 +308,14 @@
 				414E12172A5EFB4B007683D7 /* SignUpVC.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		414E12282A5F6EB9007683D7 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -469,6 +480,7 @@
 				414E11DF2A5EB3EB007683D7 /* ProfileVC.swift in Sources */,
 				414E12252A5F2266007683D7 /* Currency.swift in Sources */,
 				414E12022A5EDE6C007683D7 /* Global.swift in Sources */,
+				414E122A2A5F6EEC007683D7 /* CustomTextPicker.swift in Sources */,
 				414E11D72A5EAD00007683D7 /* TabBarController.swift in Sources */,
 				414E11A32A5EAB21007683D7 /* AppDelegate.swift in Sources */,
 				414E11F02A5EC9D8007683D7 /* TransactionsTableCell.swift in Sources */,

@@ -13,22 +13,55 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     
     func addUser(name: String, email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] _, error in
             if error != nil {
                 print(error ?? "error")
                 completion(.failure(error!))
             } else {
-                Firestore.firestore().collection("User").document(Auth.auth().currentUser!.uid).setData([
-                    "name": name,
-                    "wallet": 0,
-                    "userid": "\(Auth.auth().currentUser!.uid)",
-                    "email": Auth.auth().currentUser!.email!,
+                let docRef = Firestore.firestore().collection("User").document("\(Auth.auth().currentUser!.uid)")
+                let user = User(email: email, name: name, userid: Auth.auth().currentUser?.uid , wallet: Price(value: 0, currency: .TRY))
+                do {
+                    let jsonData = try JSONEncoder().encode(user)
+                    let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
                     
-                ])
-                completion(.success("Succes"))
+                    docRef.setData(jsonObject as? [String: Any] ?? [:]) { error in
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success("Succes"))
+                        }
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }
     }
+    func updateWallet(isExpense: Bool, cash: Double, currencyType: Price.CurrencyType, completion: @escaping (Result<String, Error>) -> Void) {
+        guard let currentUser = Global.shared.currentUser else {
+            completion(.failure(NSError(domain: "User not found", code: 0, userInfo: nil)))
+            return
+        }
+
+        let newValue = isExpense ? (currentUser.wallet!.value - cash) : (currentUser.wallet!.value + cash)
+        let newWallet = Price(value: newValue, currency: currencyType)
+        let docRef = Firestore.firestore().collection("User").document(Auth.auth().currentUser!.uid)
+
+        let walletData: [String: Any] = [
+            "value": newWallet.value,
+            "currency": newWallet.currency!.rawValue
+        ]
+
+        docRef.updateData(["wallet": walletData]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success("Cüzdan güncellendi"))
+            }
+        }
+    }
+
     
     func fetchCurrentUserDetails(completion: @escaping (_ user: User?) -> Void) {
         var user = User()
@@ -42,10 +75,12 @@ class FirebaseManager {
                     let documentData = document.data()
                     guard let documentData = documentData else { return }
                     
-                    user.email = documentData["email"] as? String
-                    user.name = documentData["name"] as? String
-                    user.userid = documentData["userid"] as? String
-                    user.wallet = documentData["wallet"] as? Double
+                    if let jsonData = try? JSONSerialization.data(withJSONObject: documentData, options: []),
+                       let transaction = try? JSONDecoder().decode(User.self, from: jsonData)
+                    {
+                        
+                        user = transaction
+                    }
                     
                     completion(user)
                 }

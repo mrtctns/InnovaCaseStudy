@@ -62,6 +62,7 @@ class LoginVC: UIViewController {
         setConstraints()
     }
     func setupUI(){
+        hideKeyboardWhenTappedAround()
         view.backgroundColor = .black
         view.addSubviews(titleLabel, emailTextField, passwordTextField, loginButton, signUpButton)
     }

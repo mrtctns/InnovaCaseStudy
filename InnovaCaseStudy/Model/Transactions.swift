@@ -22,8 +22,8 @@ struct Transactions: Codable {
 // MARK: - Price
 
 struct Price: Codable {
-    let value: Double
-    let currency: CurrencyType?
+    var value: Double
+    var currency: CurrencyType?
     
     enum CurrencyType: String, Codable {
         case EUR = "€"

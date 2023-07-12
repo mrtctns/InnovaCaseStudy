@@ -11,5 +11,5 @@ struct User: Codable{
     var email: String?
     var name: String?
     var userid: String?
-    var wallet: Double?
+    var wallet: Price?
 }

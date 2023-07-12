@@ -5,11 +5,10 @@
 //  Created by Mert Çetin on 12.07.2023.
 //
 
-import UIKit
 import FirebaseAuth
+import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
     var navigationControl: UINavigationController?
 
@@ -19,25 +18,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let rootVC = Auth.auth().currentUser != nil ? TabBarController() : LoginVC()
+        
         navigationControl?.navigationBar.isHidden = true
         navigationControl?.setNavigationBarHidden(true, animated: false)
         navigationControl = UINavigationController(rootViewController: rootVC)
         window = UIWindow(windowScene: windowScene)
-        
         fetchDatabase()
+         
     }
-    func fetchDatabase(){
-        FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
-            Global.shared.currentUser = user
-            createWindow()
+
+    func fetchDatabase() {
+        DispatchQueue.main.async { [self] in
+            FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
+                Global.shared.currentUser = user
+                createWindow()
+            }
+            FirebaseManager.shared.fetchUserTransactions { transactions in
+                transactions.forEach { transaction in
+                    Global.shared.transactionsArr.append(transaction!)
+                }
+            }
+            
         }
     }
-    func createWindow(){
+
+    func createWindow() {
         window?.rootViewController = navigationControl
         window?.overrideUserInterfaceStyle = .dark
         window?.makeKeyAndVisible()
     }
-    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -66,6 +75,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }

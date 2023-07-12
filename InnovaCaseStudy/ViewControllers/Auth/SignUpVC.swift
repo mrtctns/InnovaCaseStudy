@@ -64,6 +64,8 @@ class SignUpVC: UIViewController {
         button.addTarget(self, action: #selector(signUpClicked), for: .touchUpInside)
         return button
     }()
+    
+    var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +74,11 @@ class SignUpVC: UIViewController {
     }
 
     func setupUI() {
+        hideKeyboardWhenTappedAround()
         view.backgroundColor = .black
-        view.addSubviews(titleLabel, nameTextField, emailTextField, passwordTextField, signUpButton)
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        view.addSubviews(titleLabel, nameTextField, emailTextField, passwordTextField, signUpButton, activityIndicator)
     }
 
     func setConstraints() {
@@ -110,6 +115,23 @@ class SignUpVC: UIViewController {
 
     @objc
     func signUpClicked() {
-        
+        if nameTextField.text != "" && emailTextField.text! != "", passwordTextField.text != "" {
+            startActivityIndicator()
+            FirebaseManager.shared.addUser(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!) { [self] result in
+                
+                stopActivityIndicator()
+                navigationController?.pushViewController(TabBarController())
+                
+            }
+        }
+    }
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+        view.isUserInteractionEnabled = false
+    }
+
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+        view.isUserInteractionEnabled = true
     }
 }
