@@ -11,7 +11,7 @@ class TransactionsTableCell: UITableViewCell {
     static let identifier = "TransactionsTableCell"
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
 
@@ -21,15 +21,23 @@ class TransactionsTableCell: UITableViewCell {
         label.textColor = .lightGray
         return label
     }()
+    lazy var priceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        return label
+    }()
 
-    var item: Transactions = .init(type: .income, name: "", date: "") {
+    var item: Transactions = .init(type: .income, name: "", date: "", price: Price(value: 0, currency: "")) {
         didSet {
             nameLabel.text = item.name
             dateLabel.text = item.date
+            priceLabel.text = item.price.calculatePrice()
             if item.type == .income {
                 nameLabel.textColor = .systemGreen
+                priceLabel.textColor = .systemGreen
             } else {
                 nameLabel.textColor = .systemRed
+                priceLabel.textColor = .systemRed
             }
         }
     }
@@ -46,7 +54,7 @@ class TransactionsTableCell: UITableViewCell {
     }
 
     func setupUI() {
-        contentView.addSubviews(nameLabel, dateLabel)
+        contentView.addSubviews(nameLabel, dateLabel, priceLabel)
     }
 
     func setConstraints() {
@@ -57,6 +65,10 @@ class TransactionsTableCell: UITableViewCell {
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(4)
             make.left.equalToSuperview().offset(20)
+        }
+        priceLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-40)
+            make.centerY.equalToSuperview()
         }
     }
 }

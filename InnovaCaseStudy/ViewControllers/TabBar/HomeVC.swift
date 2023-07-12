@@ -31,6 +31,7 @@ class HomeVC: UIViewController {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 50
         tableView.backgroundColor = .systemGray6
         tableView.register(TransactionsTableCell.self, forCellReuseIdentifier: TransactionsTableCell.identifier)
         return tableView
