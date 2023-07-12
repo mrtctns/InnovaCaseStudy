@@ -33,6 +33,7 @@ class HomeVC: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .systemGray6
         tableView.register(TransactionsTableCell.self, forCellReuseIdentifier: TransactionsTableCell.identifier)
+        return tableView
 
     }()
 
@@ -40,6 +41,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         setConstraints()
+        fetchProduct()
     }
 
     func setupUI() {
@@ -61,15 +63,27 @@ class HomeVC: UIViewController {
             make.left.right.bottom.equalToSuperview()
         }
     }
+
+    func fetchProduct() {
+        do {
+            let transactions: [Transactions] = try NetworkManager.shared.readJSONData(fileName: "Action", objectType: [Transactions].self)
+            for transaction in transactions {
+                Global.shared.transactionsArr.append(transaction)
+            }
+        } catch {
+            print("JSON verisi parse edilirken bir hata oluştu: \(error)")
+        }
+    }
 }
-extension HomeVC: UITableViewDelegate, UITableViewDataSource{
+
+extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 
+        return Global.shared.transactionsArr.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = transactionsTableView.dequeueReusableCell(withIdentifier: TransactionsTableCell.identifier, for: indexPath) as! TransactionsTableCell
+        cell.item = Global.shared.transactionsArr[indexPath.row]
+        return cell
     }
-    
-    
 }

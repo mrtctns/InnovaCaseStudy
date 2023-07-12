@@ -2,51 +2,51 @@
     {
         "type": "Income",
         "name": "Salary",
-        "date": "01-07-2023"
+        "date": "01-07-2022"
     },
     {
         "type": "Expense",
         "name": "Rent",
-        "date": "05-07-2023"
+        "date": "05-07-2022"
     },
     {
         "type": "Expense",
         "name": "Groceries",
-        "date": "10-07-2023"
+        "date": "10-07-2022"
     },
     {
         "type": "Income",
         "name": "Freelance",
-        "date": "15-07-2023"
+        "date": "15-07-2022"
     },
     {
         "type": "Expense",
         "name": "Dining Out",
-        "date": "20-07-2023"
+        "date": "20-07-2022"
     },
     {
         "type": "Expense",
         "name": "Utilities",
-        "date": "25-07-2023"
+        "date": "25-07-2022"
     },
     {
         "type": "Income",
         "name": "Gift",
-        "date": "30-07-2023"
+        "date": "30-07-2022"
     },
     {
         "type": "Expense",
         "name": "Shopping",
-        "date": "05-08-2023"
+        "date": "05-08-2022"
     },
     {
         "type": "Expense",
         "name": "Transportation",
-        "date": "10-08-2023"
+        "date": "10-08-2022"
     },
     {
         "type": "Income",
         "name": "Investments",
-        "date": "15-08-2023"
+        "date": "15-08-2022"
     }
 ]

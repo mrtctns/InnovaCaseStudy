@@ -22,10 +22,10 @@ class TransactionsTableCell: UITableViewCell {
         return label
     }()
 
-    var item: Transactions {
+    var item: Transactions = .init(type: .income, name: "", date: "") {
         didSet {
             nameLabel.text = item.name
-            dateLabel.text = item.formattedDate
+            dateLabel.text = item.date
             if item.type == .income {
                 nameLabel.textColor = .systemGreen
             } else {
