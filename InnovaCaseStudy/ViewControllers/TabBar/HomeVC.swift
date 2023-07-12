@@ -32,7 +32,7 @@ class HomeVC: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .systemGray6
-        tableView.
+        tableView.register(TransactionsTableCell.self, forCellReuseIdentifier: TransactionsTableCell.identifier)
 
     }()
 
@@ -43,7 +43,7 @@ class HomeVC: UIViewController {
     }
 
     func setupUI() {
-        view.addSubviews(walletTitle, recentTransactionsLabel)
+        view.addSubviews(walletTitle, recentTransactionsLabel, transactionsTableView)
     }
 
     func setConstraints() {
@@ -56,5 +56,20 @@ class HomeVC: UIViewController {
             make.left.right.equalToSuperview()
             make.height.equalTo(40)
         }
+        transactionsTableView.snp.makeConstraints { make in
+            make.top.equalTo(recentTransactionsLabel.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
+}
+extension HomeVC: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
 }
