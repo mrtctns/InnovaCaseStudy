@@ -11,7 +11,7 @@ import UIKit
 class HomeVC: UIViewController {
     private lazy var walletTitle: UILabel = {
         let label = UILabel()
-        label.text = "My Wallet:"
+        label.text = "My Wallet: \(Int((Global.shared.currentUser?.wallet)!))"
         label.font = .boldSystemFont(ofSize: 32)
         label.textColor = .white
         return label
@@ -43,16 +43,17 @@ class HomeVC: UIViewController {
         fetchProduct()
         setupUI()
         setConstraints()
-        
     }
 
     func setupUI() {
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = .black
         view.addSubviews(walletTitle, recentTransactionsLabel, transactionsTableView)
     }
 
     func setConstraints() {
         walletTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.left.equalToSuperview().offset(20)
         }
         recentTransactionsLabel.snp.makeConstraints { make in
@@ -68,13 +69,18 @@ class HomeVC: UIViewController {
 
     func fetchProduct() {
         do {
-            let transactions: [Transactions] = try NetworkManager.shared.readJSONData(fileName: "Action", objectType: [Transactions].self)
-            for transaction in transactions {
-                Global.shared.transactionsArr.append(transaction)
-            }
-            transactionsTableView.reloadData()
+            let updatedTransactions = try NetworkManager.shared.readJSONData(fileName: "Action", objectType: [Transactions].self)
+            Global.shared.transactionsArr = updatedTransactions
         } catch {
-            print("JSON verisi parse edilirken bir hata oluştu: \(error)")
+            print("Hata: \(error)")
+        }
+        NetworkManager.shared.fetchCurrencyData { result in
+            switch result {
+            case .success(let currency): break
+            // print(currency)
+            case .failure(let error): break
+                // print("Hata: \(error)")
+            }
         }
     }
 }

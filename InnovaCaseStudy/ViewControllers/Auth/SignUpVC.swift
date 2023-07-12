@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class SignUpVC: UIViewController {
     private lazy var titleLabel: UILabel = {
@@ -109,7 +110,6 @@ class SignUpVC: UIViewController {
 
     @objc
     func signUpClicked() {
-        Auth.auth().
         
     }
 }

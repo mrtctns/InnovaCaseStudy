@@ -9,8 +9,8 @@ import Foundation
 
 struct Transactions: Codable {
     let type: TransactionType?
-    var id = UUID().uuidString
     let name: String?
+    let id = UUID().uuidString
     let date: String?
     let price: Price
 
@@ -22,7 +22,7 @@ struct Transactions: Codable {
 // MARK: - Price
 
 struct Price: Codable {
-    let value: Int
+    let value: Double
     let currency: CurrencyType?
     
     enum CurrencyType: String, Codable {

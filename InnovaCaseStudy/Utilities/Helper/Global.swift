@@ -10,4 +10,5 @@ import Foundation
 class Global{
     static let shared = Global()
     var transactionsArr: [Transactions] = []
+    var currentUser: User? = nil
 }
