@@ -24,6 +24,7 @@
 		414E11EB2A5EBC74007683D7 /* Common-Currency.json in Resources */ = {isa = PBXBuildFile; fileRef = 414E11EA2A5EBC74007683D7 /* Common-Currency.json */; };
 		414E11F02A5EC9D8007683D7 /* TransactionsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E11EF2A5EC9D7007683D7 /* TransactionsTableCell.swift */; };
 		414E11F32A5ECA28007683D7 /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E11F22A5ECA28007683D7 /* Transactions.swift */; };
+		414E11F52A5ED24B007683D7 /* Action.json in Sources */ = {isa = PBXBuildFile; fileRef = 414E11F42A5ED24B007683D7 /* Action.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		414E11EA2A5EBC74007683D7 /* Common-Currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Common-Currency.json"; sourceTree = "<group>"; };
 		414E11EF2A5EC9D7007683D7 /* TransactionsTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsTableCell.swift; sourceTree = "<group>"; };
 		414E11F22A5ECA28007683D7 /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
+		414E11F42A5ED24B007683D7 /* Action.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Action.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				414E11EA2A5EBC74007683D7 /* Common-Currency.json */,
+				414E11F42A5ED24B007683D7 /* Action.json */,
 			);
 			path = LocalJson;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				414E11F32A5ECA28007683D7 /* Transactions.swift in Sources */,
+				414E11F52A5ED24B007683D7 /* Action.json in Sources */,
 				414E11A72A5EAB21007683D7 /* HomeVC.swift in Sources */,
 				414E11DD2A5EB27A007683D7 /* BudgetVC.swift in Sources */,
 				414E11DF2A5EB3EB007683D7 /* ProfileVC.swift in Sources */,
