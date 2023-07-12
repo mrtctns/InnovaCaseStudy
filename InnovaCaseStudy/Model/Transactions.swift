@@ -9,6 +9,7 @@ import Foundation
 
 struct Transactions: Codable {
     let type: TransactionType?
+    var id = UUID().uuidString
     let name: String?
     let date: String?
     let price: Price

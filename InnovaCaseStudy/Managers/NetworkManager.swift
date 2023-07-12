@@ -25,4 +25,5 @@ class NetworkManager {
             throw error
         }
     }
+    func createUser(){}
 }
