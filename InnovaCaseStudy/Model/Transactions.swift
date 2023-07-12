@@ -22,14 +22,20 @@ struct Transactions: Codable {
 
 struct Price: Codable {
     let value: Int
-    let currency: String
+    let currency: CurrencyType?
+    
+    enum CurrencyType: String, Codable {
+        case EUR = "€"
+        case USD = "$"
+        case TRY = "₺"
+    }
 }
 
 extension Price {
     func calculatePrice() -> String {
         let currency = currency
         let price = String(value)
-        return price + " " + currency
+        return price + " " + (currency?.rawValue ?? "₺")
     }
 }
 

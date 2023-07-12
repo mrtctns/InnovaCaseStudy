@@ -27,7 +27,7 @@ class TransactionsTableCell: UITableViewCell {
         return label
     }()
 
-    var item: Transactions = .init(type: .income, name: "", date: "", price: Price(value: 0, currency: "")) {
+    var item: Transactions = .init(type: .income, name: "", date: "", price: Price(value: 0, currency: .TRY)) {
         didSet {
             nameLabel.text = item.name
             dateLabel.text = item.date
@@ -54,6 +54,7 @@ class TransactionsTableCell: UITableViewCell {
     }
 
     func setupUI() {
+        contentView.backgroundColor = .systemGray6
         contentView.addSubviews(nameLabel, dateLabel, priceLabel)
     }
 

@@ -40,9 +40,10 @@ class HomeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchProduct()
         setupUI()
         setConstraints()
-        fetchProduct()
+        
     }
 
     func setupUI() {
@@ -71,6 +72,7 @@ class HomeVC: UIViewController {
             for transaction in transactions {
                 Global.shared.transactionsArr.append(transaction)
             }
+            transactionsTableView.reloadData()
         } catch {
             print("JSON verisi parse edilirken bir hata oluştu: \(error)")
         }
