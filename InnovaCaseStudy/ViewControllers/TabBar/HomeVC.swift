@@ -57,7 +57,7 @@ class HomeVC: UIViewController {
 
     func setConstraints() {
         walletTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.left.equalToSuperview().offset(20)
         }
         recentTransactionsLabel.snp.makeConstraints { make in
