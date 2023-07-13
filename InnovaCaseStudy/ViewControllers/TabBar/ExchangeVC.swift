@@ -121,7 +121,7 @@ class ExchangeVC: UIViewController {
     @objc
     func convertClicked() {
         startActivityIndicator()
-        NetworkManager.shared.exchangeCurrency(from: "TRY", to: cashTextField.text!, amount: 340) { [self] result in
+        NetworkManager.shared.exchangeCurrency(from: "TRY", to: cashTextField.text!, amount: (Global.shared.currentUser?.wallet!.value)!) { [self] result in
             switch result {
             case .success(let convertedAmount):
                 self.convertedTitle.text = "Converted: \(convertedAmount)"

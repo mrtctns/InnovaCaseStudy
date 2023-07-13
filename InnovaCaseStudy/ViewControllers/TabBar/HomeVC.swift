@@ -55,7 +55,6 @@ class HomeVC: UIViewController {
         view.backgroundColor = .black
         view.addSubviews(walletTitle, recentTransactionsLabel, transactionsTableView)
     }
-
     func setConstraints() {
         walletTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
