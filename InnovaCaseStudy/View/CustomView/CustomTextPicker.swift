@@ -10,7 +10,7 @@ import UIKit
 
 class CustomTextPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    private var pickerData = Global.shared.departmentsArr
+    public var pickerData = ["EUR","USD","AUD","CAD"]
 
     public var completion: ((String) -> Void)?
     required init?(coder aDecoder: NSCoder) {

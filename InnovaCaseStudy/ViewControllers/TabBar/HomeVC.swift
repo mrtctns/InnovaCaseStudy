@@ -45,6 +45,9 @@ class HomeVC: UIViewController {
         setConstraints()
         updateWallet()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        transactionsTableView.reloadData()
+    }
 
     func setupUI() {
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -68,8 +71,9 @@ class HomeVC: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
-    func updateWallet(){
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateWallet"), object: nil, queue: nil) { [self] notification in
+
+    func updateWallet() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateWallet"), object: nil, queue: nil) { [self] _ in
             walletTitle.text = "My Wallet: \(Global.shared.currentUser!.wallet!.calculatePrice())"
         }
     }
@@ -80,17 +84,9 @@ class HomeVC: UIViewController {
             updatedTransactions.forEach { Transaction in
                 Global.shared.transactionsArr.append(Transaction)
             }
-            
+
         } catch {
             print("Hata: \(error)")
-        }
-        NetworkManager.shared.fetchCurrencyData { result in
-            switch result {
-            case .success(let currency): break
-            // print(currency)
-            case .failure(let error): break
-                // print("Hata: \(error)")
-            }
         }
     }
 }

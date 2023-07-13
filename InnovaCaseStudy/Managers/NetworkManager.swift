@@ -27,7 +27,6 @@ class NetworkManager {
         }
     }
 
-
     func fetchCurrencyData(completion: @escaping (Result<[Currency], Error>) -> Void) {
         var arrCurrency = [Currency]()
 
@@ -44,27 +43,38 @@ class NetworkManager {
 
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            if error != nil {
-                print(error as Any)
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             } else {
                 let httpResponse = response as? HTTPURLResponse
                 do {
-                    let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
-                    let data = jsonResponse!["result"] as! [String: Any]
-
-                    for (currency, country) in data {
-                        arrCurrency.append(Currency(currency: currency, country: country as! String))
+                    guard let data = data else {
+                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
                     }
-                    completion(.success(arrCurrency))
-
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    if let result = jsonResponse?["result"] as? [String: Any] {
+                        for (currency, country) in result {
+                            arrCurrency.append(Currency(currency: currency, country: country as! String))
+                        }
+                        DispatchQueue.main.async {
+                            completion(.success(arrCurrency))
+                        }
+                    } else {
+                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                    }
                 } catch {
-                    print("hi")
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }
         })
 
         dataTask.resume()
     }
+
 
     func exchangeCurrency(from: String, to: String, amount: Double, completion: @escaping (Result<Double, Error>) -> Void) {
         let headers = [
@@ -79,22 +89,33 @@ class NetworkManager {
         request.allHTTPHeaderFields = headers
 
         let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            if error != nil {
-                print(error as Any)
+        let dataTask = session.dataTask(with: request as URLRequest) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             } else {
                 let httpResponse = response as? HTTPURLResponse
                 do {
-                    let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String: Any]
-                    let data = jsonResponse!["result"] as! Double
-
-                    completion(.success(data))
-
+                    guard let data = data else {
+                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                    }
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    if let result = jsonResponse?["result"] as? Double {
+                        let roundedResult = (result * 100).rounded() / 100
+                        DispatchQueue.main.async {
+                            completion(.success(roundedResult))
+                        }
+                    } else {
+                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                    }
                 } catch {
-                    print("hi")
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }
-        })
+        }
 
         dataTask.resume()
     }

@@ -45,6 +45,7 @@
 		414E12252A5F2266007683D7 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12242A5F2266007683D7 /* Currency.swift */; };
 		414E12272A5F4D4B007683D7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12262A5F4D4B007683D7 /* UIViewController+Extension.swift */; };
 		414E122A2A5F6EEC007683D7 /* CustomTextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */; };
+		414E122C2A5F7742007683D7 /* CurrenciesTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E122B2A5F7742007683D7 /* CurrenciesTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		414E12242A5F2266007683D7 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		414E12262A5F4D4B007683D7 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextPicker.swift; sourceTree = "<group>"; };
+		414E122B2A5F7742007683D7 /* CurrenciesTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				414E11EF2A5EC9D7007683D7 /* TransactionsTableCell.swift */,
+				414E122B2A5F7742007683D7 /* CurrenciesTableCell.swift */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				414E12182A5EFB4B007683D7 /* SignUpVC.swift in Sources */,
 				414E11DD2A5EB27A007683D7 /* BudgetVC.swift in Sources */,
 				414E12062A5EF0DC007683D7 /* String+Extension.swift in Sources */,
+				414E122C2A5F7742007683D7 /* CurrenciesTableCell.swift in Sources */,
 				414E121A2A5EFD64007683D7 /* UINavigationController+Extension.swift in Sources */,
 				414E11DF2A5EB3EB007683D7 /* ProfileVC.swift in Sources */,
 				414E12252A5F2266007683D7 /* Currency.swift in Sources */,
