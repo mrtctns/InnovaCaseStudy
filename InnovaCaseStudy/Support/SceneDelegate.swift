@@ -5,18 +5,52 @@
 //  Created by Mert Çetin on 12.07.2023.
 //
 
+import FirebaseAuth
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
     var window: UIWindow?
-
+    var navigationControl: UINavigationController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let rootVC = Auth.auth().currentUser != nil ? TabBarController() : LoginVC()
+        
+        navigationControl?.navigationBar.isHidden = true
+        navigationControl?.setNavigationBarHidden(true, animated: false)
+        navigationControl = UINavigationController(rootViewController: rootVC)
+        window = UIWindow(windowScene: windowScene)
+        if Auth.auth().currentUser != nil {
+            fetchDatabase()
+        } else{
+            createWindow()
+        }
+        
+         
+    }
+
+    func fetchDatabase() {
+        DispatchQueue.main.async { [self] in
+            FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
+                Global.shared.currentUser = user
+                createWindow()
+            }
+            FirebaseManager.shared.fetchUserTransactions { transactions in
+                transactions.forEach { transaction in
+                    Global.shared.transactionsArr.append(transaction!)
+                }
+            }
+            
+        }
+    }
+
+    func createWindow() {
+        window?.rootViewController = navigationControl
+        window?.overrideUserInterfaceStyle = .dark
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -46,7 +80,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
-
