@@ -113,9 +113,11 @@ class LoginVC: UIViewController {
 
     @objc
     func loginClicked() {
+        startActivityIndicator()
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { _, err in
             if err != nil {
                 print(err)
+                self.stopActivityIndicator()
             } else {
                 FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
                     Global.shared.currentUser = user
