@@ -4,8 +4,8 @@
             "name": "Salary",
             "date": "01-07-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 10,
+                    "currency": "₺"
             }
     },
     {
@@ -13,8 +13,8 @@
             "name": "Rent",
             "date": "05-07-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 200,
+                    "currency": "₺"
             }
     },
     {
@@ -22,7 +22,7 @@
             "name": "Groceries",
             "date": "10-07-2022",
             "price": {
-                "value": 180,
+                "value": 130,
                     "currency": "$"
             }
     },
@@ -31,8 +31,8 @@
             "name": "Freelance",
             "date": "15-07-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 134,
+                    "currency": "₺"
             }
     },
     {
@@ -40,7 +40,7 @@
             "name": "Dining Out",
             "date": "20-07-2022",
             "price": {
-                "value": 180,
+                "value": 112,
                     "currency": "$"
             }
     },
@@ -49,8 +49,8 @@
             "name": "Utilities",
             "date": "25-07-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 170,
+                    "currency": "₺"
             }
     },
     {
@@ -58,8 +58,8 @@
             "name": "Gift",
             "date": "30-07-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 160,
+                    "currency": "₺"
             }
     },
     {
@@ -68,7 +68,7 @@
             "date": "05-08-2022",
             "price": {
                 "value": 180,
-                    "currency": "$"
+                    "currency": "₺"
             }
     },
     {
@@ -76,8 +76,8 @@
             "name": "Transportation",
             "date": "10-08-2022",
             "price": {
-                "value": 180,
-                    "currency": "$"
+                "value": 120,
+                    "currency": "₺"
             }
     },
     {
@@ -85,7 +85,7 @@
             "name": "Investments",
             "date": "15-08-2022",
             "price": {
-                "value": 180,
+                "value": 120,
                     "currency": "$"
             }
     }

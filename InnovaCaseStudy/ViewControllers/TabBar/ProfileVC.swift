@@ -9,6 +9,11 @@ import FirebaseAuth
 import UIKit
 
 class ProfileVC: UIViewController {
+    private lazy var profileImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
+        return imageView
+    }()
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name: \(Global.shared.currentUser!.name ?? "")"
@@ -52,12 +57,17 @@ class ProfileVC: UIViewController {
 
     func setupUI() {
         view.backgroundColor = .black
-        view.addSubviews(nameLabel, emailLabel, userIdLabel, logOutButton)
+        view.addSubviews(profileImage,nameLabel, emailLabel, userIdLabel, logOutButton)
     }
 
     func setConstraints() {
-        nameLabel.snp.makeConstraints { make in
+        profileImage.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(80)
+            make.width.height.equalTo(200)
+            make.centerX.equalToSuperview()
+        }
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImage.snp.bottom).offset(32)
             make.centerX.equalToSuperview()
         }
         emailLabel.snp.makeConstraints { make in

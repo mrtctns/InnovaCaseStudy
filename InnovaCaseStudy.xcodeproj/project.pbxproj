@@ -41,7 +41,6 @@
 		414E12182A5EFB4B007683D7 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12172A5EFB4B007683D7 /* SignUpVC.swift */; };
 		414E121A2A5EFD64007683D7 /* UINavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12192A5EFD64007683D7 /* UINavigationController+Extension.swift */; };
 		414E121C2A5F0253007683D7 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E121B2A5F0253007683D7 /* FirebaseManager.swift */; };
-		414E12212A5F1781007683D7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 414E12202A5F1781007683D7 /* Alamofire */; };
 		414E12252A5F2266007683D7 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12242A5F2266007683D7 /* Currency.swift */; };
 		414E12272A5F4D4B007683D7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12262A5F4D4B007683D7 /* UIViewController+Extension.swift */; };
 		414E122A2A5F6EEC007683D7 /* CustomTextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414E12292A5F6EEC007683D7 /* CustomTextPicker.swift */; };
@@ -112,7 +111,6 @@
 				414E12132A5EF321007683D7 /* FirebaseFirestoreSwift in Frameworks */,
 				414E11E52A5EBA20007683D7 /* SnapKit in Frameworks */,
 				414E12112A5EF321007683D7 /* FirebaseFirestore in Frameworks */,
-				414E12212A5F1781007683D7 /* Alamofire in Frameworks */,
 				414E120F2A5EF321007683D7 /* FirebaseAuthCombine-Community in Frameworks */,
 				414E120D2A5EF321007683D7 /* FirebaseAuth in Frameworks */,
 			);
@@ -343,7 +341,6 @@
 				414E120E2A5EF321007683D7 /* FirebaseAuthCombine-Community */,
 				414E12102A5EF321007683D7 /* FirebaseFirestore */,
 				414E12122A5EF321007683D7 /* FirebaseFirestoreSwift */,
-				414E12202A5F1781007683D7 /* Alamofire */,
 			);
 			productName = InnovaCaseStudy;
 			productReference = 414E119F2A5EAB21007683D7 /* InnovaCaseStudy.app */;
@@ -420,7 +417,6 @@
 			packageReferences = (
 				414E11E32A5EBA20007683D7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				414E120B2A5EF321007683D7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				414E121F2A5F1781007683D7 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 414E11A02A5EAB21007683D7 /* Products */;
 			projectDirPath = "";
@@ -849,14 +845,6 @@
 				minimumVersion = 10.0.0;
 			};
 		};
-		414E121F2A5F1781007683D7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -884,11 +872,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 414E120B2A5EF321007683D7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
-		};
-		414E12202A5F1781007683D7 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 414E121F2A5F1781007683D7 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

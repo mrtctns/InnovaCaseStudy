@@ -126,7 +126,8 @@ class BudgetVC: UIViewController {
                         NotificationCenter.default.post(name: NSNotification.Name("UpdateWallet"), object: nil)
                         stopActivityIndicator()
                         Global.shared.transactionsArr.append(transaction)
-                        
+                        transactionNameTextField.text = ""
+                        cashTextField.text = ""
                     }
                 }
             }
