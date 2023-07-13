@@ -13,14 +13,13 @@ class FirebaseManager {
     static let shared = FirebaseManager()
     
     func addUser(name: String, email: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
-        
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] _, error in
             if error != nil {
                 print(error ?? "error")
                 completion(.failure(error!))
             } else {
                 let docRef = Firestore.firestore().collection("User").document("\(Auth.auth().currentUser!.uid)")
-                let user = User(email: email, name: name, userid: Auth.auth().currentUser?.uid , wallet: Price(value: 0, currency: .TRY))
+                let user = User(email: email, name: name, userid: Auth.auth().currentUser?.uid, wallet: Price(value: 0, currency: .TRY))
                 do {
                     let jsonData = try JSONEncoder().encode(user)
                     let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
@@ -38,6 +37,7 @@ class FirebaseManager {
             }
         }
     }
+
     func updateWallet(isExpense: Bool, cash: Double, currencyType: Price.CurrencyType, completion: @escaping (Result<String, Error>) -> Void) {
         guard let currentUser = Global.shared.currentUser else {
             completion(.failure(NSError(domain: "User not found", code: 0, userInfo: nil)))
@@ -62,7 +62,6 @@ class FirebaseManager {
         }
     }
 
-    
     func fetchCurrentUserDetails(completion: @escaping (_ user: User?) -> Void) {
         var user = User()
         let docRef = Firestore.firestore().collection("User").document("\(Auth.auth().currentUser!.uid)")
@@ -78,7 +77,6 @@ class FirebaseManager {
                     if let jsonData = try? JSONSerialization.data(withJSONObject: documentData, options: []),
                        let transaction = try? JSONDecoder().decode(User.self, from: jsonData)
                     {
-                        
                         user = transaction
                     }
                     
@@ -97,13 +95,11 @@ class FirebaseManager {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    
                     let documentData = document.data()
                         
                     if let jsonData = try? JSONSerialization.data(withJSONObject: documentData, options: []),
                        let transaction = try? JSONDecoder().decode(Transactions.self, from: jsonData)
                     {
-                        
                         transactions.append(transaction)
                     }
                 }

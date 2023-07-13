@@ -8,18 +8,17 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       configure()
+        self.configure()
     }
-    func configure(){
+
+    func configure() {
         self.tabBar.tintColor = .systemBlue
         self.tabBar.barStyle = .black
         self.tabBar.backgroundColor = .systemGray2.withAlphaComponent(0.7)
         self.tabBar.isTranslucent = true
-        
         
         let HomeVCItem = HomeVC()
         let BudgetVCItem = BudgetVC()
@@ -31,16 +30,11 @@ class TabBarController: UITabBarController {
         ExchangeVCItem.tabBarItem = UITabBarItem(title: "Exchange", image: UIImage(systemName: "dollarsign.circle"), selectedImage: UIImage(systemName: "dollarsign.circle.fill"))
         ProfileVCItem.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
         
-        
-        
         let HomeVCNavController = UINavigationController(rootViewController: HomeVCItem)
         let BudgetVCNavController = UINavigationController(rootViewController: BudgetVCItem)
         let ExchangeVCNavController = UINavigationController(rootViewController: ExchangeVCItem)
         let ProfileVCNavController = UINavigationController(rootViewController: ProfileVCItem)
         
         viewControllers = [HomeVCNavController, BudgetVCNavController, ExchangeVCNavController, ProfileVCNavController]
-        
     }
-
-
 }
