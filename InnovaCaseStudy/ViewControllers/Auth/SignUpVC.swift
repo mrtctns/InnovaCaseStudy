@@ -33,6 +33,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .systemGray6
         textField.textColor = .white
+        textField.keyboardType = .emailAddress
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 50))
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 3
@@ -118,9 +119,12 @@ class SignUpVC: UIViewController {
         if nameTextField.text != "" && emailTextField.text! != "", passwordTextField.text != "" {
             startActivityIndicator()
             FirebaseManager.shared.addUser(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!) { [self] result in
+                FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
+                    Global.shared.currentUser = user
+                    stopActivityIndicator()
+                    navigationController?.pushViewController(TabBarController())
+                }
                 
-                stopActivityIndicator()
-                navigationController?.pushViewController(TabBarController())
                 
             }
         }

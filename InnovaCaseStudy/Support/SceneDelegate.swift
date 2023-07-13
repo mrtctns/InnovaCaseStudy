@@ -23,7 +23,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationControl?.setNavigationBarHidden(true, animated: false)
         navigationControl = UINavigationController(rootViewController: rootVC)
         window = UIWindow(windowScene: windowScene)
-        fetchDatabase()
+        if Auth.auth().currentUser != nil {
+            fetchDatabase()
+        } else{
+            createWindow()
+        }
+        
          
     }
 
