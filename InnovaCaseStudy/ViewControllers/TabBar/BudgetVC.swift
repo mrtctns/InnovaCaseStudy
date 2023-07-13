@@ -119,14 +119,15 @@ class BudgetVC: UIViewController {
             let transaction = Transactions(type: type, name: transactionNameTextField.text, date: Date().toString(), price: Price(value: Double(cashTextField.text!)!, currency: .TRY))
             startActivityIndicator()
 
-            FirebaseManager.shared.addTransactions(object: transaction) {[self] _ in
+            FirebaseManager.shared.addTransactions(object: transaction) { [self] _ in
                 FirebaseManager.shared.updateWallet(isExpense: isExpense, cash: Double(cashTextField.text!)!, currencyType: .TRY) { [self] _ in
                     FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
                         Global.shared.currentUser = user
                         NotificationCenter.default.post(name: NSNotification.Name("UpdateWallet"), object: nil)
                         stopActivityIndicator()
                         Global.shared.transactionsArr.append(transaction)
-                        
+                        transactionNameTextField.text = ""
+                        cashTextField.text = ""
                     }
                 }
             }

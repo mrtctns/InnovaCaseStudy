@@ -45,6 +45,7 @@ class HomeVC: UIViewController {
         setConstraints()
         updateWallet()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         transactionsTableView.reloadData()
     }
@@ -54,10 +55,9 @@ class HomeVC: UIViewController {
         view.backgroundColor = .black
         view.addSubviews(walletTitle, recentTransactionsLabel, transactionsTableView)
     }
-
     func setConstraints() {
         walletTitle.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.left.equalToSuperview().offset(20)
         }
         recentTransactionsLabel.snp.makeConstraints { make in

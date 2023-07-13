@@ -5,9 +5,9 @@
 //  Created by Mert Çetin on 12.07.2023.
 //
 
-import UIKit
 import FirebaseAuth
 import FirebaseFirestore
+import UIKit
 
 class SignUpVC: UIViewController {
     private lazy var titleLabel: UILabel = {
@@ -53,8 +53,6 @@ class SignUpVC: UIViewController {
         return textField
     }()
 
-   
-
     private lazy var signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
@@ -65,7 +63,7 @@ class SignUpVC: UIViewController {
         button.addTarget(self, action: #selector(signUpClicked), for: .touchUpInside)
         return button
     }()
-    
+
     var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
@@ -116,19 +114,18 @@ class SignUpVC: UIViewController {
 
     @objc
     func signUpClicked() {
-        if nameTextField.text != "" && emailTextField.text! != "", passwordTextField.text != "" {
+        if nameTextField.text != "", emailTextField.text! != "", passwordTextField.text != "" {
             startActivityIndicator()
-            FirebaseManager.shared.addUser(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!) { [self] result in
+            FirebaseManager.shared.addUser(name: nameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!) { [self] _ in
                 FirebaseManager.shared.fetchCurrentUserDetails { [self] user in
                     Global.shared.currentUser = user
                     stopActivityIndicator()
                     navigationController?.pushViewController(TabBarController())
                 }
-                
-                
             }
         }
     }
+
     func startActivityIndicator() {
         activityIndicator.startAnimating()
         view.isUserInteractionEnabled = false
