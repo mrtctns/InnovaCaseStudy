@@ -18,18 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let rootVC = Auth.auth().currentUser != nil ? TabBarController() : LoginVC()
-        
+
         navigationControl?.navigationBar.isHidden = true
         navigationControl?.setNavigationBarHidden(true, animated: false)
         navigationControl = UINavigationController(rootViewController: rootVC)
         window = UIWindow(windowScene: windowScene)
         if Auth.auth().currentUser != nil {
             fetchDatabase()
-        } else{
+        } else {
             createWindow()
         }
-        
-         
     }
 
     func fetchDatabase() {
@@ -43,7 +41,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     Global.shared.transactionsArr.append(transaction!)
                 }
             }
-            
         }
     }
 

@@ -14,6 +14,7 @@ class ProfileVC: UIViewController {
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
         return imageView
     }()
+
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name: \(Global.shared.currentUser!.name ?? "")"
@@ -33,7 +34,7 @@ class ProfileVC: UIViewController {
     private lazy var userIdLabel: UILabel = {
         let label = UILabel()
         label.text = "ID: \(Global.shared.currentUser!.userid ?? "")"
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 16)
         label.textColor = .white
         return label
     }()
@@ -57,7 +58,7 @@ class ProfileVC: UIViewController {
 
     func setupUI() {
         view.backgroundColor = .black
-        view.addSubviews(profileImage,nameLabel, emailLabel, userIdLabel, logOutButton)
+        view.addSubviews(profileImage, nameLabel, emailLabel, userIdLabel, logOutButton)
     }
 
     func setConstraints() {

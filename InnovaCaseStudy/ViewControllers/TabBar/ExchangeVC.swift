@@ -171,6 +171,7 @@ extension ExchangeVC: UITableViewDelegate, UITableViewDataSource {
         cell.item = currencyArr[indexPath.row]
         return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cashTextField.text = currencyArr[indexPath.row].currency
         currenciesTableView.reloadData()

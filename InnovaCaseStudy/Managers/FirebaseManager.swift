@@ -97,14 +97,13 @@ class FirebaseManager {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    // Firestore belge verilerini alın
+                    
                     let documentData = document.data()
                         
-                    // Firestore verilerini modele dönüştürün
                     if let jsonData = try? JSONSerialization.data(withJSONObject: documentData, options: []),
                        let transaction = try? JSONDecoder().decode(Transactions.self, from: jsonData)
                     {
-                        // Başarıyla modele dönüştürüldü
+                        
                         transactions.append(transaction)
                     }
                 }

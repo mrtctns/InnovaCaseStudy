@@ -45,6 +45,7 @@ class HomeVC: UIViewController {
         setConstraints()
         updateWallet()
     }
+
     override func viewWillAppear(_ animated: Bool) {
         transactionsTableView.reloadData()
     }

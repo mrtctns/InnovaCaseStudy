@@ -48,10 +48,10 @@ class NetworkManager {
                     completion(.failure(error))
                 }
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                _ = response as? HTTPURLResponse
                 do {
                     guard let data = data else {
-                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                        throw NSError(domain: "", code: 0, userInfo: nil)
                     }
                     let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                     if let result = jsonResponse?["result"] as? [String: Any] {
@@ -62,7 +62,7 @@ class NetworkManager {
                             completion(.success(arrCurrency))
                         }
                     } else {
-                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                        throw NSError(domain: "", code: 0, userInfo: nil) 
                     }
                 } catch {
                     DispatchQueue.main.async {
@@ -95,10 +95,10 @@ class NetworkManager {
                     completion(.failure(error))
                 }
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                _ = response as? HTTPURLResponse
                 do {
                     guard let data = data else {
-                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                        throw NSError(domain: "", code: 0, userInfo: nil)
                     }
                     let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                     if let result = jsonResponse?["result"] as? Double {
@@ -107,7 +107,7 @@ class NetworkManager {
                             completion(.success(roundedResult))
                         }
                     } else {
-                        throw NSError(domain: "", code: 0, userInfo: nil) // Dummy error
+                        throw NSError(domain: "", code: 0, userInfo: nil)
                     }
                 } catch {
                     DispatchQueue.main.async {
