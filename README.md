@@ -1,5 +1,5 @@
 # Innova Case Study
-### Introduction
+## Introduction
 This project is developed by Mert Çetin for the Innova company case study.
 
 This project is developed to using UIKit and programmatic UI.
@@ -10,7 +10,7 @@ This project is developed to using UIKit and programmatic UI.
 ##### -MVC
 ##### -Singleton Pattern
 
-### Network Manager
+## Network Manager
 ```Swift
 func readJSONData<T: Decodable>(fileName: String, objectType: T.Type) throws -> T
 ```
@@ -24,7 +24,7 @@ func exchangeCurrency(from: String, to: String, amount: Double, completion: @esc
 ```
 This code defines a function that uses an API to convert a specified amount of currency from one type to another and returns the result through a completion handler.
 
-### Firebase Manager
+## Firebase Manager
 ```Swift
 func addUser(name: String, email: String, password: String, completion: @escaping (Result<String, Error>) -> Void)
 ```
