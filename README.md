@@ -3,12 +3,12 @@
 This project is developed by Mert Çetin for the Innova company case study.
 
 This project is developed to using UIKit and programmatic UI.
-#### -Programmatic UI
-#### -URLSession
-#### -Firebase
-#### -SnapKit
-#### -MVC
-#### -Singleton Pattern
+##### -Programmatic UI
+##### -URLSession
+##### -Firebase
+##### -SnapKit
+##### -MVC
+##### -Singleton Pattern
 
 ### Network Manager
 ```Swift
